@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIASAT - Portal Admin</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Toggle Sidebar (Mobile) -->
+    <button class="sidebar-toggle" onclick="toggleSidebar()">
+      ☰ Menu Admin
+    </button>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="logo-section">
+        <div class="logo-badge">
+          <img src="img/logo1.png" alt="Foto Rafael" class="logo-photo" />
+        </div>
+        <div class="logo-text">
+          <h1>SIASAT</h1>
+          <p>Portal Administrator</p>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-inner">
+          <div class="profile-avatar">🛡️</div>
+          <div class="profile-meta">
+            <h2>Admin Akademik</h2>
+            <p>ID: ADM-001</p>
+            <div class="status-chip"><span>●</span> Super Administrator</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="menu">
+        <div class="menu-group">
+          <div class="menu-title">Panel Utama</div>
+
+          <div
+            class="menu-item active"
+            data-page="dashboard"
+            onclick="showPage('dashboard', this)"
+          >
+            <span class="icon">🏠</span>
+            <span class="label">Dashboard</span>
+          </div>
+
+          <div
+            class="menu-item"
+            data-page="keuangan"
+            onclick="showPage('keuangan', this)"
+          >
+            <span class="icon">💰</span>
+            <span class="label">Manajemen Keuangan</span>
+            <span class="menu-badge">12</span>
+          </div>
+
+          <div
+            class="menu-item"
+            data-page="kelas"
+            onclick="showPage('kelas', this)"
+          >
+            <span class="icon">🏫</span>
+            <span class="label">Manajemen Kelas</span>
+          </div>
+
+          <div
+            class="menu-item"
+            data-page="pengguna"
+            onclick="showPage('pengguna', this)"
+          >
+            <span class="icon">👥</span>
+            <span class="label">Manajemen Pengguna</span>
+          </div>
+
+          <div
+            class="menu-item"
+            data-page="laporan"
+            onclick="showPage('laporan', this)"
+          >
+            <span class="icon">📊</span>
+            <span class="label">Laporan</span>
+          </div>
+
+          <div
+            class="menu-item"
+            data-page="pengaturan"
+            onclick="showPage('pengaturan', this)"
+          >
+            <span class="icon">⚙️</span>
+            <span class="label">Pengaturan Sistem</span>
+          </div>
+        </div>
+      </nav>
+
+      <button class="logout-btn" onclick="logout()">
+        <span>🚪</span>Keluar dari SIASAT
+      </button>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <!-- DASHBOARD -->
+      <section id="page-dashboard" class="page active">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>Dashboard Admin SIASAT</h2>
+            <p>
+              Ringkasan aktivitas akademik, keuangan, dan operasional sistem.
+            </p>
+          </div>
+          <div class="top-bar-right">
+            <span class="pill">Tahun Akademik: 2024/2025</span>
+            <span class="pill">Semester: Genap</span>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-inner">
+              <span class="stat-icon">🎓</span>
+              <div class="stat-label">Total Mahasiswa Aktif</div>
+              <div class="stat-value">2.430</div>
+              <div class="stat-extra">Semua program studi</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-inner">
+              <span class="stat-icon">👨‍🏫</span>
+              <div class="stat-label">Total Dosen</div>
+              <div class="stat-value">187</div>
+              <div class="stat-extra">Tetap & Luar biasa</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-inner">
+              <span class="stat-icon">💳</span>
+              <div class="stat-label">Pembayaran UKT Terkumpul</div>
+              <div class="stat-value">Rp 3,2M</div>
+              <div class="stat-extra">Periode berjalan</div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 72%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-inner">
+              <span class="stat-icon">⚠️</span>
+              <div class="stat-label">Transaksi Pending</div>
+              <div class="stat-value">12</div>
+              <div class="stat-extra">Perlu verifikasi manual</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Pembayaran Terbaru</div>
+              <div class="card-link" onclick="showPage('keuangan')">
+                Kelola keuangan →
+              </div>
+            </div>
+
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Tanggal</th>
+                    <th>NIM</th>
+                    <th>Nama</th>
+                    <th>Prodi</th>
+                    <th>Nominal</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>02-12-2025</td>
+                    <td>842023012</td>
+                    <td>Rafael</td>
+                    <td>Sistem Informasi</td>
+                    <td>Rp 7.500.000</td>
+                    <td>
+                      <span class="badge-pill badge-success">Lunas</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>02-12-2025</td>
+                    <td>842023018</td>
+                    <td>Anita</td>
+                    <td>Sistem Informasi</td>
+                    <td>Rp 7.500.000</td>
+                    <td>
+                      <span class="badge-pill badge-warning">Pending</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>01-12-2025</td>
+                    <td>832022015</td>
+                    <td>William</td>
+                    <td>Teknik Informatika</td>
+                    <td>Rp 7.900.000</td>
+                    <td>
+                      <span class="badge-pill badge-success">Lunas</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Notifikasi Sistem</div>
+            </div>
+
+            <div class="announcement">
+              <span class="announcement-badge badge-danger">PENTING</span>
+              <div class="announcement-title">Batas Akhir Pembayaran UKT</div>
+              <div class="announcement-text">
+                Batas akhir pembayaran UKT Semester Genap 2024/2025:
+                <strong>15 Desember 2025</strong>. Setelah tanggal tersebut,
+                denda keterlambatan akan diterapkan.
+              </div>
+            </div>
+
+            <div class="announcement">
+              <span class="announcement-badge badge-info">MAINTENANCE</span>
+              <div class="announcement-title">
+                Jadwal Perawatan Server SIASAT
+              </div>
+              <div class="announcement-text">
+                Sistem akan tidak dapat diakses pada 05 Desember 2025 pukul
+                00.00–02.00 WIB untuk pemeliharaan berkala.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- KEUANGAN -->
+      <section id="page-keuangan" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>💰 Manajemen Keuangan</h2>
+            <p>
+              Kelola tagihan UKT, cek status pembayaran, dan verifikasi
+              transaksi.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Daftar Tagihan Mahasiswa</div>
+          </div>
+
+          <div class="krs-controls">
+            <input
+              type="text"
+              class="input-small"
+              id="keuCari"
+              placeholder="Cari NIM / nama..."
+              oninput="filterKeuangan()"
+            />
+            <select
+              id="keuFilterStatus"
+              class="input-small"
+              onchange="filterKeuangan()"
+            >
+              <option value="">Semua Status</option>
+              <option value="lunas">Lunas</option>
+              <option value="pending">Pending</option>
+              <option value="belum">Belum Bayar</option>
+            </select>
+            <button
+              class="btn-mini"
+              type="button"
+              onclick="resetFilterKeuangan()"
+            >
+              Reset
+            </button>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>NIM</th>
+                  <th>Nama</th>
+                  <th>Prodi</th>
+                  <th>Tagihan</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="keuanganTableBody">
+                <!-- diisi JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 1rem">
+          <div class="card-header">
+            <div class="card-title">Rekapitulasi Keuangan</div>
+          </div>
+          <div class="summary-grid">
+            <div class="summary-card">
+              <h4>Ringkasan Tagihan</h4>
+              <div class="summary-row">
+                <span class="summary-label">Total Tagihan</span>
+                <span class="summary-value">Rp 18.500.000</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">Sudah Dibayar</span>
+                <span class="summary-value">Rp 14.000.000</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">Sisa</span>
+                <span class="summary-value">Rp 4.500.000</span>
+              </div>
+            </div>
+            <div class="summary-card">
+              <h4>Status Pembayaran</h4>
+              <div class="summary-row">
+                <span class="summary-label">Lunas</span>
+                <span class="summary-value">3 Mahasiswa</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">Pending</span>
+                <span class="summary-value">1 Mahasiswa</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">Belum Bayar</span>
+                <span class="summary-value">1 Mahasiswa</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- KELAS -->
+      <section id="page-kelas" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>🏫 Manajemen Kelas & Mata Kuliah</h2>
+            <p>
+              Atur kelas yang dibuka, kapasitas, dosen pengampu, dan status
+              ketersediaan.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Tambah Kelas Baru</div>
+          </div>
+
+          <div class="krs-layout">
+            <div>
+              <div class="form-group">
+                <label>Kode Mata Kuliah</label>
+                <input
+                  type="text"
+                  id="kelasKode"
+                  class="input-small"
+                  style="width: 100%; max-width: 220px"
+                  placeholder="Contoh: SI301"
+                />
+              </div>
+              <div class="form-group">
+                <label>Nama Mata Kuliah</label>
+                <input
+                  type="text"
+                  id="kelasNama"
+                  class="input-small"
+                  style="width: 100%"
+                  placeholder="Contoh: Sistem Informasi Manajemen"
+                />
+              </div>
+              <div class="form-group">
+                <label>Program Studi</label>
+                <select
+                  id="kelasProdi"
+                  class="input-small"
+                  style="width: 100%; max-width: 240px"
+                >
+                  <option value="">Pilih Prodi</option>
+                  <option value="Sistem Informasi">Sistem Informasi</option>
+                  <option value="Teknik Informatika">Teknik Informatika</option>
+                  <option value="Akuntansi">Akuntansi</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <div class="form-group">
+                <label>Semester</label>
+                <input
+                  type="number"
+                  id="kelasSemester"
+                  class="input-small"
+                  style="width: 100%; max-width: 120px"
+                  placeholder="Contoh: 3"
+                />
+              </div>
+              <div class="form-group">
+                <label>Kapasitas Kelas</label>
+                <input
+                  type="number"
+                  id="kelasKapasitas"
+                  class="input-small"
+                  style="width: 100%; max-width: 120px"
+                  placeholder="Contoh: 40"
+                />
+              </div>
+              <div class="form-group">
+                <label>Dosen Pengampu</label>
+                <input
+                  type="text"
+                  id="kelasDosen"
+                  class="input-small"
+                  style="width: 100%"
+                  placeholder="Contoh: Dr. Dosen Kampus"
+                />
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-mini" type="button" onclick="tambahKelas()">
+            ➕ Simpan Kelas
+          </button>
+        </div>
+
+        <div class="card" style="margin-top: 1rem">
+          <div class="card-header">
+            <div class="card-title">Daftar Kelas Dibuka</div>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kode</th>
+                  <th>Mata Kuliah</th>
+                  <th>Prodi</th>
+                  <th>Sem</th>
+                  <th>Kapasitas</th>
+                  <th>Terisi</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="kelasTableBody">
+                <!-- Diisi JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PENGGUNA -->
+      <section id="page-pengguna" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>👥 Manajemen Pengguna</h2>
+            <p>
+              Kelola akun mahasiswa, dosen, dan admin serta status keaktifannya.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Daftar Pengguna</div>
+          </div>
+
+          <div class="krs-controls">
+            <input
+              type="text"
+              class="input-small"
+              id="penggunaCari"
+              placeholder="Cari nama / email..."
+              oninput="filterPengguna()"
+            />
+            <select
+              id="penggunaRole"
+              class="input-small"
+              onchange="filterPengguna()"
+            >
+              <option value="">Semua Role</option>
+              <option value="mahasiswa">Mahasiswa</option>
+              <option value="dosen">Dosen</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nama</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="penggunaTableBody">
+                <!-- JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- LAPORAN -->
+      <section id="page-laporan" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>📊 Laporan Akademik & Keuangan</h2>
+            <p>
+              Generate laporan ringkas untuk pimpinan, keuangan, dan bagian
+              akademik.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Generate Laporan</div>
+          </div>
+
+          <div class="krs-controls">
+            <select id="laporanJenis" class="input-small">
+              <option value="keuangan">Rekap Keuangan UKT</option>
+              <option value="krs">Rekap KRS & Kelas</option>
+              <option value="mahasiswa">Statistik Mahasiswa</option>
+            </select>
+            <select id="laporanPeriode" class="input-small">
+              <option value="2024_ganjil">2024/2025 Ganjil</option>
+              <option value="2024_genap">2024/2025 Genap</option>
+            </select>
+            <button class="btn-mini" type="button" onclick="generateLaporan()">
+              📄 Buat Laporan (Demo)
+            </button>
+          </div>
+
+          <div class="placeholder" id="laporanPreview">
+            Pilih jenis laporan dan periode, lalu klik
+            <strong>"Buat Laporan (Demo)"</strong> untuk melihat simulasi hasil.
+          </div>
+        </div>
+      </section>
+
+      <!-- PENGATURAN -->
+      <section id="page-pengaturan" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>⚙️ Pengaturan Sistem</h2>
+            <p>
+              Sesuaikan parameter akademik, batas SKS, dan periode aktif portal.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Konfigurasi Akademik</div>
+          </div>
+
+          <div class="krs-layout">
+            <div>
+              <div class="form-group">
+                <label>Tahun Akademik Aktif</label>
+                <input type="text" class="input-small" value="2024/2025" />
+              </div>
+              <div class="form-group">
+                <label>Semester Aktif</label>
+                <select class="input-small">
+                  <option>Ganjil</option>
+                  <option selected>Genap</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Batas SKS Mahasiswa</label>
+                <input type="number" class="input-small" value="24" />
+              </div>
+            </div>
+
+            <div>
+              <div class="form-group">
+                <label>Aktifkan KRS Online</label>
+                <select class="input-small">
+                  <option>Nonaktif</option>
+                  <option selected>Aktif</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Aktifkan Pembayaran Online</label>
+                <select class="input-small">
+                  <option>Nonaktif</option>
+                  <option selected>Aktif</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Mode Sistem</label>
+                <select class="input-small">
+                  <option selected>Produksi</option>
+                  <option>Sandbox / Demo</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="btn-mini"
+            type="button"
+            onclick="showToast('success','Pengaturan tersimpan (simulasi).')"
+          >
+            💾 Simpan Pengaturan
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast">
+      <span id="toastIcon" class="toast-icon">ℹ️</span>
+      <span id="toastMessage"></span>
+    </div>
+
+    <script>
+      // ========= NAV / PAGE SWITCH =========
+      function showPage(pageId, el) {
+        document
+          .querySelectorAll(".page")
+          .forEach((p) => p.classList.remove("active"));
+
+        const target = document.getElementById("page-" + pageId);
+        if (target) target.classList.add("active");
+
+        document
+          .querySelectorAll(".menu-item")
+          .forEach((mi) => mi.classList.remove("active"));
+        if (el) {
+          el.classList.add("active");
+        } else {
+          const menu = document.querySelector(
+            '.menu-item[data-page="' + pageId + '"]'
+          );
+          if (menu) menu.classList.add("active");
+        }
+
+        document.getElementById("sidebar").classList.remove("open");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("open");
+      }
+
+      function logout() {
+        // sesuaikan dengan nama file login kamu
+        window.location.href = "login.html";
+      }
+
+      // ========= TOAST =========
+      let toastTimeout;
+      function showToast(type, message) {
+        const toast = document.getElementById("toast");
+        const icon = document.getElementById("toastIcon");
+        const msg = document.getElementById("toastMessage");
+
+        toast.classList.remove("toast-success", "toast-error");
+        if (type === "success") {
+          toast.classList.add("toast-success");
+          icon.textContent = "✅";
+        } else {
+          toast.classList.add("toast-error");
+          icon.textContent = "⚠️";
+        }
+        msg.textContent = message;
+
+        toast.classList.add("show");
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
+      }
+
+      // ========= DATA DUMMY KEUANGAN =========
+      const dataKeuangan = [
+        {
+          nim: "842023012",
+          nama: "Rafael",
+          prodi: "Sistem Informasi",
+          tagihan: "Rp 7.500.000",
+          status: "lunas",
+        },
+        {
+          nim: "842023018",
+          nama: "Anita",
+          prodi: "Sistem Informasi",
+          tagihan: "Rp 7.500.000",
+          status: "pending",
+        },
+        {
+          nim: "832022015",
+          nama: "William",
+          prodi: "Teknik Informatika",
+          tagihan: "Rp 7.900.000",
+          status: "lunas",
+        },
+        {
+          nim: "832022010",
+          nama: "Budi",
+          prodi: "Teknik Informatika",
+          tagihan: "Rp 7.900.000",
+          status: "belum",
+        },
+      ];
+
+      function renderKeuangan() {
+        const tbody = document.getElementById("keuanganTableBody");
+        tbody.innerHTML = "";
+        const cari = document.getElementById("keuCari").value.toLowerCase();
+        const status = document.getElementById("keuFilterStatus").value;
+
+        dataKeuangan.forEach((row) => {
+          if (
+            cari &&
+            !(
+              row.nim.toLowerCase().includes(cari) ||
+              row.nama.toLowerCase().includes(cari)
+            )
+          )
+            return;
+          if (status && row.status !== status) return;
+
+          let badge = "";
+          if (row.status === "lunas") {
+            badge = '<span class="badge-pill badge-success">Lunas</span>';
+          } else if (row.status === "pending") {
+            badge = '<span class="badge-pill badge-warning">Pending</span>';
+          } else {
+            badge = '<span class="badge-pill badge-muted">Belum Bayar</span>';
+          }
+
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${row.nim}</td>
+            <td>${row.nama}</td>
+            <td>${row.prodi}</td>
+            <td>${row.tagihan}</td>
+            <td>${badge}</td>
+            <td>
+              <button class="btn-mini" type="button" onclick="showToast('success','Verifikasi pembayaran ${row.nama} (demo).')">
+                Verifikasi
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function filterKeuangan() {
+        renderKeuangan();
+      }
+
+      function resetFilterKeuangan() {
+        document.getElementById("keuCari").value = "";
+        document.getElementById("keuFilterStatus").value = "";
+        renderKeuangan();
+      }
+
+      // ========= DATA KELAS =========
+      const dataKelas = [
+        {
+          kode: "SI301",
+          nama: "Sistem Informasi Manajemen",
+          prodi: "Sistem Informasi",
+          sem: 3,
+          kapasitas: 40,
+          terisi: 32,
+          status: "Terbuka",
+        },
+        {
+          kode: "WEB302",
+          nama: "Pemrograman Web",
+          prodi: "Sistem Informasi",
+          sem: 3,
+          kapasitas: 35,
+          terisi: 35,
+          status: "Penuh",
+        },
+        {
+          kode: "BDL304",
+          nama: "Basis Data Lanjut",
+          prodi: "Teknik Informatika",
+          sem: 4,
+          kapasitas: 40,
+          terisi: 26,
+          status: "Terbuka",
+        },
+      ];
+
+      function renderKelas() {
+        const tbody = document.getElementById("kelasTableBody");
+        tbody.innerHTML = "";
+        dataKelas.forEach((kls, idx) => {
+          let statusChip = '<span class="chip chip-oke">Terbuka</span>';
+          if (kls.status === "Penuh") {
+            statusChip = '<span class="chip chip-penuh">Penuh</span>';
+          } else if (kls.status === "Ditutup") {
+            statusChip = '<span class="chip chip-bentrok">Ditutup</span>';
+          }
+
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${kls.kode}</td>
+            <td>${kls.nama}</td>
+            <td>${kls.prodi}</td>
+            <td>${kls.sem}</td>
+            <td>${kls.kapasitas}</td>
+            <td>${kls.terisi}</td>
+            <td>${statusChip}</td>
+            <td class="actions">
+              <button class="btn-small" type="button" onclick="ubahStatusKelas(${idx})">
+                Ubah Status
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function tambahKelas() {
+        const kode = document.getElementById("kelasKode").value.trim();
+        const nama = document.getElementById("kelasNama").value.trim();
+        const prodi = document.getElementById("kelasProdi").value;
+        const sem = parseInt(
+          document.getElementById("kelasSemester").value,
+          10
+        );
+        const kapas = parseInt(
+          document.getElementById("kelasKapasitas").value,
+          10
+        );
+        const dosen = document.getElementById("kelasDosen").value.trim();
+
+        if (!kode || !nama || !prodi || !sem || !kapas || !dosen) {
+          showToast("error", "Mohon lengkapi data kelas sebelum menyimpan.");
+          return;
+        }
+
+        dataKelas.push({
+          kode,
+          nama,
+          prodi,
+          sem,
+          kapasitas: kapas,
+          terisi: 0,
+          status: "Terbuka",
+        });
+
+        renderKelas();
+        showToast(
+          "success",
+          `Kelas ${kode} - ${nama} berhasil ditambahkan (simulasi).`
+        );
+
+        document.getElementById("kelasKode").value = "";
+        document.getElementById("kelasNama").value = "";
+        document.getElementById("kelasProdi").value = "";
+        document.getElementById("kelasSemester").value = "";
+        document.getElementById("kelasKapasitas").value = "";
+        document.getElementById("kelasDosen").value = "";
+      }
+
+      function ubahStatusKelas(idx) {
+        const kls = dataKelas[idx];
+        if (!kls) return;
+
+        if (kls.status === "Terbuka") kls.status = "Ditutup";
+        else if (kls.status === "Ditutup") kls.status = "Terbuka";
+        else if (kls.status === "Penuh") kls.status = "Terbuka";
+
+        renderKelas();
+        showToast(
+          "success",
+          `Status kelas ${kls.kode} diubah menjadi ${kls.status} (simulasi).`
+        );
+      }
+
+      // ========= DATA PENGGUNA =========
+      const dataPengguna = [
+        {
+          nama: "Rafael",
+          email: "rafael@uksw.ac.id",
+          role: "mahasiswa",
+          status: "aktif",
+        },
+        {
+          nama: "Dr. Dosen Kampus",
+          email: "dosen@uksw.ac.id",
+          role: "dosen",
+          status: "aktif",
+        },
+        {
+          nama: "Admin Akademik",
+          email: "admin@uksw.ac.id",
+          role: "admin",
+          status: "aktif",
+        },
+        {
+          nama: "Steffen",
+          email: "steffen@uksw.ac.id",
+          role: "mahasiswa",
+          status: "nonaktif",
+        },
+      ];
+
+      function renderPengguna() {
+        const tbody = document.getElementById("penggunaTableBody");
+        tbody.innerHTML = "";
+        const cari = document
+          .getElementById("penggunaCari")
+          .value.toLowerCase();
+        const role = document.getElementById("penggunaRole").value;
+
+        dataPengguna.forEach((u, idx) => {
+          if (
+            cari &&
+            !(
+              u.nama.toLowerCase().includes(cari) ||
+              u.email.toLowerCase().includes(cari)
+            )
+          )
+            return;
+          if (role && u.role !== role) return;
+
+          let badge = '<span class="badge-pill badge-success">Aktif</span>';
+          if (u.status !== "aktif") {
+            badge = '<span class="badge-pill badge-muted">Nonaktif</span>';
+          }
+
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${u.nama}</td>
+            <td>${u.email}</td>
+            <td>${u.role}</td>
+            <td>${badge}</td>
+            <td>
+              <button class="btn-mini" type="button" onclick="toggleStatusPengguna(${idx})">
+                Ubah Status
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function filterPengguna() {
+        renderPengguna();
+      }
+
+      function toggleStatusPengguna(idx) {
+        const u = dataPengguna[idx];
+        if (!u) return;
+        u.status = u.status === "aktif" ? "nonaktif" : "aktif";
+        renderPengguna();
+        showToast(
+          "success",
+          `Status pengguna ${u.nama} diubah menjadi ${u.status} (simulasi).`
+        );
+      }
+
+      // ========= LAPORAN =========
+      function generateLaporan() {
+        const jenis = document.getElementById("laporanJenis").value;
+        const periode = document.getElementById("laporanPeriode").value;
+        const preview = document.getElementById("laporanPreview");
+
+        let teksJenis = "";
+        if (jenis === "keuangan") teksJenis = "Rekap Keuangan UKT";
+        else if (jenis === "krs") teksJenis = "Rekap KRS & Kelas";
+        else teksJenis = "Statistik Mahasiswa";
+
+        preview.innerHTML = `
+          <p><strong>${teksJenis}</strong><br/>
+          Periode: ${periode.replace("_", " ").toUpperCase()}</p>
+          <p style="margin-top:0.5rem;font-size:0.85rem;">
+            (Simulasi) Laporan ini akan berisi data ringkas untuk pimpinan, termasuk grafik,
+            rekap numerik, dan rincian per program studi.
+          </p>
+        `;
+        showToast(
+          "success",
+          `Laporan ${teksJenis} berhasil digenerate (simulasi).`
+        );
+      }
+
+      // INIT
+      document.addEventListener("DOMContentLoaded", () => {
+        renderKeuangan();
+        renderKelas();
+        renderPengguna();
+        showPage("dashboard");
+      });
+    </script>
+  </body>
+</html>
