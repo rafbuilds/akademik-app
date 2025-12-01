@@ -7,151 +7,401 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Header -->
-    <header>
-      <div class="header-content">
-        <div class="header-title">
-          <!-- Tombol Logout -->
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-          </svg>
-          <div>
-            <h1>SIASAT - Portal Dosen</h1>
-            <p>Universitas Kristen Satya Wacana</p>
+    <!-- Toggle Sidebar (Mobile) -->
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰ Menu</button>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="logo-section">
+        <div class="logo-badge">
+          <img src="img/logo1.png" alt="Foto Rafael" class="logo-photo" />
+        </div>
+        <div class="logo-text">
+          <h1>SIASAT</h1>
+          <p>Portal Dosen</p>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-inner">
+          <div class="profile-avatar">👨‍🏫</div>
+          <div class="profile-meta">
+            <h2>Dr. BAHLIL</h2>
+            <p>NIDN: 1234567890</p>
+            <div class="status-chip"><span>●</span> Dosen Tetap Prodi BD</div>
           </div>
-          <div style="margin-left: auto">
-            <button
-              onclick="logout()"
-              class="btn btn-danger"
-              style="
-                padding: 8px 16px;
-                border-radius: 8px;
-                background: #dc2626;
-                color: white;
-                border: none;
-                cursor: pointer;
-              "
+        </div>
+      </div>
+
+      <nav class="menu">
+        <div class="menu-group">
+          <div class="menu-title">Menu Utama</div>
+
+          <div
+            class="menu-item active"
+            data-page="dashboard"
+            onclick="showPage('dashboard', this)"
+          >
+            <span class="icon">🏠</span>
+            <span class="label">Dashboard</span>
+          </div>
+
+          <div
+            class="menu-item"
+            data-page="krs"
+            onclick="showPage('krs', this)"
+          >
+            <span class="icon">✅</span>
+            <span class="label">Validasi KRS</span>
+            <span class="menu-badge">4</span>
+          </div>
+
+          <div
+            class="menu-item"
+            data-page="nilai"
+            onclick="showPage('nilai', this)"
+          >
+            <span class="icon">📝</span>
+            <span class="label">Input Nilai</span>
+          </div>
+
+          <div
+            class="menu-item"
+            data-page="jadwal"
+            onclick="showPage('jadwal', this)"
+          >
+            <span class="icon">📅</span>
+            <span class="label">Jadwal Mengajar</span>
+          </div>
+
+          <div
+            class="menu-item"
+            data-page="pengumuman"
+            onclick="showPage('pengumuman', this)"
+          >
+            <span class="icon">📢</span>
+            <span class="label">Pengumuman</span>
+          </div>
+
+          <div
+            class="menu-item"
+            data-page="bimbingan"
+            onclick="showPage('bimbingan', this)"
+          >
+            <span class="icon">🎓</span>
+            <span class="label">Bimbingan Akademik</span>
+          </div>
+        </div>
+      </nav>
+
+      <button class="logout-btn" onclick="logout()">
+        <span>🚪</span>Keluar dari SIASAT
+      </button>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <!-- DASHBOARD -->
+      <section id="page-dashboard" class="page active">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>Selamat datang, Dosen 👋</h2>
+            <p>
+              Pantau aktivitas akademik, validasi KRS, dan kelola nilai dalam
+              satu portal.
+            </p>
+          </div>
+          <div class="top-bar-right">
+            <span class="pill">Tahun Akademik: 2024/2025</span>
+            <span class="pill">Semester: Genap</span>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-inner">
+              <span class="stat-icon">📚</span>
+              <div class="stat-label">Mata Kuliah Diampu</div>
+              <div class="stat-value">5</div>
+              <div class="stat-extra">Termasuk kelas reguler & praktikum</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-inner">
+              <span class="stat-icon">👨‍🎓</span>
+              <div class="stat-label">Mahasiswa Dibimbing</div>
+              <div class="stat-value">24</div>
+              <div class="stat-extra">Bimbingan akademik & tugas akhir</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-inner">
+              <span class="stat-icon">✅</span>
+              <div class="stat-label">KRS Menunggu Validasi</div>
+              <div class="stat-value" id="krsPendingCount">4</div>
+              <div class="stat-extra">Segera validasi sebelum batas akhir</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-inner">
+              <span class="stat-icon">📝</span>
+              <div class="stat-label">Nilai Belum Lengkap</div>
+              <div class="stat-value">2</div>
+              <div class="stat-extra">Kelas butuh input nilai akhir</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <div class="quick-card" onclick="showPage('krs')">
+            <span>✅</span>
+            <p>Validasi KRS Mahasiswa</p>
+          </div>
+          <div class="quick-card" onclick="showPage('nilai')">
+            <span>📝</span>
+            <p>Input Nilai Ujian</p>
+          </div>
+          <div class="quick-card" onclick="showPage('jadwal')">
+            <span>📅</span>
+            <p>Lihat Jadwal Mengajar</p>
+          </div>
+          <div class="quick-card" onclick="showPage('pengumuman')">
+            <span>📢</span>
+            <p>Kirim Pengumuman Kelas</p>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">📅 Jadwal Mengajar Hari Ini</div>
+              <div class="card-link" onclick="showPage('jadwal')">
+                Lihat jadwal lengkap →
+              </div>
+            </div>
+
+            <div class="schedule-item">
+              <div class="schedule-time">08:00 - 10:00 • Senin</div>
+              <div class="schedule-course">
+                Sistem Informasi Manajemen (SIM301)
+              </div>
+              <div class="schedule-location">📍 R.301 • Kelas SI-3A</div>
+            </div>
+            <div class="schedule-item">
+              <div class="schedule-time">13:00 - 15:00 • Senin</div>
+              <div class="schedule-course">Pemrograman Web (WEB302)</div>
+              <div class="schedule-location">
+                💻 Lab Komputer 2 • Kelas SI-3B
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">📢 Pengumuman Terbaru</div>
+              <div class="card-link" onclick="showPage('pengumuman')">
+                Kelola pengumuman →
+              </div>
+            </div>
+
+            <div class="announcement">
+              <span class="announcement-badge badge-danger">PENTING</span>
+              <div class="announcement-title">
+                Batas Akhir Input Nilai Semester
+              </div>
+              <div class="announcement-text">
+                Input nilai akhir wajib diselesaikan sebelum 10 Maret 2025 pukul
+                23.59 WIB.
+              </div>
+            </div>
+
+            <div class="announcement">
+              <span class="announcement-badge badge-info">INFO SISTEM</span>
+              <div class="announcement-title">Maintenance Portal Akademik</div>
+              <div class="announcement-text">
+                Sistem akan tidak dapat diakses pada 1 Maret 2025 pukul
+                00.00–02.00 WIB.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- KRS VALIDATION -->
+      <section id="page-krs" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>✅ Validasi KRS Mahasiswa</h2>
+            <p>
+              Tinjau dan setujui KRS mahasiswa bimbingan untuk Semester Genap
+              2024/2025.
+            </p>
+          </div>
+          <div class="top-bar-right">
+            <span class="pill"
+              >Total Menunggu: <span id="krsPendingBadge">4</span></span
             >
-              Logout
+          </div>
+        </div>
+
+        <div class="krs-layout">
+          <!-- KIRI: Daftar KRS Masuk -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Daftar KRS Menunggu Validasi</div>
+            </div>
+
+            <div class="krs-controls">
+              <input
+                type="text"
+                class="input-small"
+                id="searchMahasiswa"
+                placeholder="Cari nama / NIM..."
+                oninput="filterKrsList()"
+              />
+              <select
+                id="filterStatusKRS"
+                class="input-small"
+                onchange="filterKrsList()"
+              >
+                <option value="">Semua Status</option>
+                <option value="pending">Menunggu</option>
+                <option value="disetujui">Disetujui</option>
+                <option value="ditolak">Ditolak</option>
+              </select>
+              <button
+                class="btn-mini"
+                type="button"
+                onclick="resetKrsFilterDosen()"
+              >
+                Reset
+              </button>
+            </div>
+
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>NIM</th>
+                    <th>Nama</th>
+                    <th>Prodi</th>
+                    <th>SKS</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="krsListBody">
+                  <!-- diisi via JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="krs-info-card">
+              <strong>Catatan:</strong>
+              <ul>
+                <li>
+                  KRS yang sudah <strong>disetujui</strong> akan terkunci untuk
+                  mahasiswa.
+                </li>
+                <li>
+                  Jika ditolak, berikan catatan agar mahasiswa dapat melakukan
+                  revisi.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- KANAN: Detail KRS Mahasiswa -->
+          <div class="card" id="krsDetailCard">
+            <div class="card-header">
+              <div class="card-title" id="detailTitle">
+                Detail KRS Mahasiswa
+              </div>
+              <button
+                class="btn-small"
+                type="button"
+                onclick="approveSelectedKRS()"
+              >
+                ✅ Setujui KRS
+              </button>
+            </div>
+
+            <div class="krs-info-card" id="krsDetailInfo">
+              <div>
+                Pilih salah satu mahasiswa di tabel kiri untuk melihat detail
+                KRS.
+              </div>
+            </div>
+
+            <div class="table-container krs-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Kode</th>
+                    <th>Mata Kuliah</th>
+                    <th>SKS</th>
+                    <th>Jadwal</th>
+                  </tr>
+                </thead>
+                <tbody id="krsDetailBody">
+                  <!-- diisi via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INPUT NILAI -->
+      <section id="page-nilai" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>📝 Input Nilai</h2>
+            <p>
+              Input nilai UTS, UAS, dan tugas untuk setiap kelas yang diampu.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Pilih Mata Kuliah</div>
+          </div>
+          <div class="krs-controls">
+            <select
+              id="selectMatkul"
+              class="input-small"
+              onchange="loadNilaiMahasiswa()"
+            >
+              <option value="SIM301">
+                SIM301 - Sistem Informasi Manajemen
+              </option>
+              <option value="BDL304">BDL304 - Basis Data Lanjut</option>
+              <option value="WEB302">WEB302 - Pemrograman Web</option>
+            </select>
+
+            <select
+              id="selectJenisUjian"
+              class="input-small"
+              onchange="loadNilaiMahasiswa()"
+            >
+              <option value="UTS">UTS</option>
+              <option value="UAS">UAS</option>
+              <option value="Tugas">Tugas</option>
+            </select>
+
+            <button
+              class="btn-mini"
+              type="button"
+              onclick="showToast('success','Nilai tersimpan (demo).')"
+            >
+              💾 Simpan Semua
             </button>
           </div>
-        </div>
-      </div>
-    </header>
 
-    <!-- Navigation -->
-    <nav>
-      <div class="nav-content">
-        <button class="nav-button active" onclick="showPage('home')">
-          🏠 Beranda
-        </button>
-        <button class="nav-button" onclick="showPage('nilai')">
-          📝 Nilai Ujian
-        </button>
-        <button class="nav-button" onclick="showPage('jadwal')">
-          📅 Jadwal Mengajar
-        </button>
-        <button class="nav-button" onclick="showPage('pengumuman')">
-          📢 Pengumuman
-        </button>
-      </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main>
-      <!-- HOME -->
-      <div id="page-home" class="page">
-        <div class="home-container">
-          <h1 class="home-title">Selamat Datang, Dosen</h1>
-          <p class="home-subtitle">
-            Kelola nilai ujian, jadwal mengajar, dan pengumuman kelas dalam satu
-            portal.
-          </p>
-
-          <div class="menu-grid">
-            <div class="menu-card green" onclick="showPage('nilai')">
-              <div style="font-size: 2rem; margin-bottom: 0.5rem">📝</div>
-              <div>Input Nilai Ujian</div>
-            </div>
-
-            <div class="menu-card teal" onclick="showPage('jadwal')">
-              <div style="font-size: 2rem; margin-bottom: 0.5rem">📅</div>
-              <div>Jadwal Mengajar</div>
-            </div>
-
-            <div class="menu-card purple" onclick="showPage('pengumuman')">
-              <div style="font-size: 2rem; margin-bottom: 0.5rem">📢</div>
-              <div>Pengumuman Kelas</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-card">
-          <h3>Ringkasan Mengajar Hari Ini</h3>
-          <div class="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Jam</th>
-                  <th>Mata Kuliah</th>
-                  <th>Kelas</th>
-                  <th>Ruangan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>08:00 - 10:00</td>
-                  <td>Sistem Informasi</td>
-                  <td>SI-3A</td>
-                  <td>R.101</td>
-                </tr>
-                <tr>
-                  <td>13:00 - 15:00</td>
-                  <td>Pemrograman Web</td>
-                  <td>SI-3B</td>
-                  <td>R.203</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- NILAI UJIAN -->
-      <div id="page-nilai" class="page hidden">
-        <h2 class="page-title">Input Nilai Ujian</h2>
-
-        <div class="form-card">
-          <div class="form-group">
-            <label>Mata Kuliah</label>
-            <select class="form-control">
-              <option>Sistem Informasi</option>
-              <option>Basis Data</option>
-              <option>Pemrograman Web</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Jenis Ujian</label>
-            <select class="form-control">
-              <option>UTS</option>
-              <option>UAS</option>
-              <option>Kuis</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-card">
-          <h3>Daftar Mahasiswa</h3>
           <div class="table-container">
             <table>
               <thead>
@@ -159,294 +409,540 @@
                   <th>NIM</th>
                   <th>Nama Mahasiswa</th>
                   <th>Nilai</th>
-                  <th class="text-center">Aksi</th>
+                  <th>Grade</th>
+                  <th></th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>842023012</td>
-                  <td>Rafael</td>
-                  <td>
-                    <input
-                      type="number"
-                      class="form-control"
-                      min="0"
-                      max="100"
-                    />
-                  </td>
-                  <td class="text-center">
-                    <button
-                      class="btn btn-success"
-                      onclick="alert('Nilai disimpan (demo)')"
-                    >
-                      Simpan
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>842023013</td>
-                  <td>Eka</td>
-                  <td>
-                    <input
-                      type="number"
-                      class="form-control"
-                      min="0"
-                      max="100"
-                    />
-                  </td>
-                  <td class="text-center">
-                    <button
-                      class="btn btn-success"
-                      onclick="alert('Nilai disimpan (demo)')"
-                    >
-                      Simpan
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>842023015</td>
-                  <td>Steffen</td>
-                  <td>
-                    <input
-                      type="number"
-                      class="form-control"
-                      min="0"
-                      max="100"
-                    />
-                  </td>
-                  <td class="text-center">
-                    <button
-                      class="btn btn-success"
-                      onclick="alert('Nilai disimpan (demo)')"
-                    >
-                      Simpan
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>842023016</td>
-                  <td>William</td>
-                  <td>
-                    <input
-                      type="number"
-                      class="form-control"
-                      min="0"
-                      max="100"
-                    />
-                  </td>
-                  <td class="text-center">
-                    <button
-                      class="btn btn-success"
-                      onclick="alert('Nilai disimpan (demo)')"
-                    >
-                      Simpan
-                    </button>
-                  </td>
-                </tr>
+              <tbody id="nilaiTableBody">
+                <!-- diisi via JS -->
               </tbody>
             </table>
           </div>
         </div>
-      </div>
+      </section>
 
       <!-- JADWAL MENGAJAR -->
-      <div id="page-jadwal" class="page hidden">
-        <h2 class="page-title">Jadwal Mengajar</h2>
+      <section id="page-jadwal" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>📅 Jadwal Mengajar</h2>
+            <p>Jadwal mengajar mingguan berdasarkan mata kuliah yang diampu.</p>
+          </div>
+        </div>
 
-        <div class="form-card">
-          <h3>Jadwal Aktif</h3>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Jadwal Mingguan</div>
+          </div>
+
           <div class="table-container">
             <table>
               <thead>
                 <tr>
                   <th>Hari</th>
                   <th>Waktu</th>
+                  <th>Kode</th>
                   <th>Mata Kuliah</th>
                   <th>Kelas</th>
                   <th>Ruangan</th>
-                  <th class="text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>Senin</td>
                   <td>08:00 - 10:00</td>
-                  <td>Sistem Informasi</td>
+                  <td>SIM301</td>
+                  <td>Sistem Informasi Manajemen</td>
                   <td>SI-3A</td>
-                  <td>R.101</td>
-                  <td class="text-center">
-                    <button
-                      class="btn btn-warning"
-                      onclick="alert('Edit jadwal (demo)')"
-                    >
-                      Edit
-                    </button>
-                  </td>
+                  <td>R.301</td>
+                </tr>
+                <tr>
+                  <td>Senin</td>
+                  <td>13:00 - 15:00</td>
+                  <td>WEB302</td>
+                  <td>Pemrograman Web</td>
+                  <td>SI-3B</td>
+                  <td>Lab Komputer 2</td>
                 </tr>
                 <tr>
                   <td>Rabu</td>
-                  <td>13:00 - 15:00</td>
-                  <td>Pemrograman Web</td>
-                  <td>SI-3B</td>
-                  <td>R.203</td>
-                  <td class="text-center">
-                    <button
-                      class="btn btn-warning"
-                      onclick="alert('Edit jadwal (demo)')"
-                    >
-                      Edit
-                    </button>
-                  </td>
+                  <td>09:00 - 11:00</td>
+                  <td>BDL304</td>
+                  <td>Basis Data Lanjut</td>
+                  <td>SI-4A</td>
+                  <td>R.402</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-
-        <div class="form-card">
-          <h3>Tambah Jadwal Mengajar</h3>
-          <div class="form-group">
-            <label>Hari</label>
-            <select class="form-control">
-              <option>Senin</option>
-              <option>Selasa</option>
-              <option>Rabu</option>
-              <option>Kamis</option>
-              <option>Jumat</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Waktu</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Contoh: 10:00 - 12:00"
-            />
-          </div>
-          <div class="form-group">
-            <label>Mata Kuliah</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Nama mata kuliah"
-            />
-          </div>
-          <div class="form-group">
-            <label>Kelas</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Contoh: SI-3A"
-            />
-          </div>
-          <div class="form-group">
-            <label>Ruangan</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Contoh: R.202 / Lab Komputer"
-            />
-          </div>
-          <button
-            class="btn btn-primary"
-            type="button"
-            onclick="alert('Jadwal ditambahkan (demo)!')"
-          >
-            Tambah Jadwal
-          </button>
-        </div>
-      </div>
+      </section>
 
       <!-- PENGUMUMAN -->
-      <div id="page-pengumuman" class="page hidden">
-        <h2 class="page-title">Pengumuman Kelas</h2>
+      <section id="page-pengumuman" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>📢 Pengumuman Kelas</h2>
+            <p>Kirim pengumuman ke mahasiswa per kelas / mata kuliah.</p>
+          </div>
+        </div>
 
-        <div class="form-card">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Buat Pengumuman Baru</div>
+          </div>
+
           <div class="form-group">
             <label>Mata Kuliah</label>
-            <select class="form-control">
-              <option>Sistem Informasi</option>
-              <option>Basis Data</option>
-              <option>Pemrograman Web</option>
+            <select
+              id="pengumumanMatkul"
+              class="input-small"
+              style="width: 100%; max-width: 260px"
+            >
+              <option value="SIM301">
+                SIM301 - Sistem Informasi Manajemen
+              </option>
+              <option value="BDL304">BDL304 - Basis Data Lanjut</option>
+              <option value="WEB302">WEB302 - Pemrograman Web</option>
             </select>
           </div>
+
           <div class="form-group">
             <label>Judul Pengumuman</label>
             <input
+              id="pengumumanJudul"
               type="text"
-              class="form-control"
-              placeholder="Contoh: Perubahan Jadwal Kuliah"
+              class="input-small"
+              style="width: 100%; max-width: 100%"
+              placeholder="Contoh: Perubahan jadwal perkuliahan"
             />
           </div>
+
           <div class="form-group">
             <label>Isi Pengumuman</label>
             <textarea
-              class="form-control"
+              id="pengumumanIsi"
+              class="input-small"
               rows="4"
-              placeholder="Tulis pengumuman di sini..."
+              style="width: 100%; max-width: 100%; resize: vertical"
+              placeholder="Tulis isi pengumuman di sini..."
             ></textarea>
           </div>
-          <button
-            class="btn btn-primary"
-            type="button"
-            onclick="alert('Pengumuman dikirim (demo)!')"
-          >
-            Kirim Pengumuman
+
+          <button class="btn-mini" type="button" onclick="kirimPengumuman()">
+            📤 Kirim Pengumuman
           </button>
         </div>
-      </div>
+
+        <div class="card" style="margin-top: 1rem">
+          <div class="card-header">
+            <div class="card-title">Riwayat Pengumuman</div>
+          </div>
+          <div class="announcement">
+            <span class="announcement-badge badge-info">WEB302</span>
+            <div class="announcement-title">
+              Tugas Project Web - Deadline Diperpanjang
+            </div>
+            <div class="announcement-text">
+              Pengumpulan tugas project web diperpanjang sampai 15 Maret 2025.
+            </div>
+          </div>
+          <div class="announcement">
+            <span class="announcement-badge badge-info">SIM301</span>
+            <div class="announcement-title">Kuliah Pengganti Hari Jumat</div>
+            <div class="announcement-text">
+              Kuliah pengganti akan dilaksanakan pada hari Sabtu pukul
+              09.00–11.00 di R.302.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BIMBINGAN -->
+      <section id="page-bimbingan" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>🎓 Bimbingan Akademik</h2>
+            <p>Daftar mahasiswa bimbingan akademik dan kemajuan studinya.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Mahasiswa Bimbingan</div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>NIM</th>
+                  <th>Nama</th>
+                  <th>Prodi</th>
+                  <th>Angkatan</th>
+                  <th>IPK</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>842023012</td>
+                  <td>Rafael</td>
+                  <td>Sistem Informasi</td>
+                  <td>2023</td>
+                  <td>3.75</td>
+                  <td>
+                    <span class="badge-pill badge-success">Baik</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>842023018</td>
+                  <td>Anita</td>
+                  <td>Sistem Informasi</td>
+                  <td>2023</td>
+                  <td>3.10</td>
+                  <td>
+                    <span class="badge-pill badge-muted">Perlu Monitoring</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="placeholder">
+            Di sini bisa ditambahkan fitur catatan bimbingan per mahasiswa.
+          </div>
+        </div>
+      </section>
     </main>
 
-    <!-- Footer -->
-    <footer>
-      <p>&copy; 2024 Sistem Informasi Akademik. UKSW. All rights reserved.</p>
-      <p class="footer-subtitle">Demo Version - Portal Dosen</p>
-    </footer>
+    <!-- TOAST -->
+    <div id="toast" class="toast">
+      <span id="toastIcon" class="toast-icon">ℹ️</span>
+      <span id="toastMessage"></span>
+    </div>
 
     <script>
-      function showPage(pageName) {
-        // Sembunyikan semua page
-        const pages = document.querySelectorAll(".page");
-        pages.forEach((page) => page.classList.add("hidden"));
+      // ===== NAV / PAGE SWITCH =====
+      function showPage(pageId, el) {
+        document
+          .querySelectorAll(".page")
+          .forEach((p) => p.classList.remove("active"));
+        const page = document.getElementById("page-" + pageId);
+        if (page) page.classList.add("active");
 
-        // Tampilkan page yang dipilih
-        document.getElementById("page-" + pageName).classList.remove("hidden");
+        document
+          .querySelectorAll(".menu-item")
+          .forEach((mi) => mi.classList.remove("active"));
 
-        // Update nav aktif (kalau klik dari nav)
-        const navButtons = document.querySelectorAll(".nav-button");
-        navButtons.forEach((btn) => btn.classList.remove("active"));
-        if (event && event.target.classList.contains("nav-button")) {
-          event.target.classList.add("active");
+        if (el) {
+          el.classList.add("active");
+        } else {
+          const menu = document.querySelector(
+            '.menu-item[data-page="' + pageId + '"]'
+          );
+          if (menu) menu.classList.add("active");
         }
 
-        // Scroll ke atas
-        window.scrollTo(0, 0);
+        document.getElementById("sidebar").classList.remove("open");
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
-      document.addEventListener("DOMContentLoaded", () => {
-        showPage("home");
-      });
-      function showPage(pageName) {
-        const pages = document.querySelectorAll(".page");
-        pages.forEach((page) => page.classList.add("hidden"));
-        document.getElementById("page-" + pageName).classList.remove("hidden");
-
-        const navButtons = document.querySelectorAll(".nav-button");
-        navButtons.forEach((btn) => btn.classList.remove("active"));
-        if (event && event.target.classList.contains("nav-button")) {
-          event.target.classList.add("active");
-        }
-        window.scrollTo(0, 0);
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("open");
       }
 
-      document.addEventListener("DOMContentLoaded", () => {
-        showPage("home");
-      });
-
-      // Fungsi Logout
       function logout() {
         window.location.href = "login.html";
       }
+
+      // ===== TOAST =====
+      let toastTimeout;
+      function showToast(type, message) {
+        const toast = document.getElementById("toast");
+        const icon = document.getElementById("toastIcon");
+        const msg = document.getElementById("toastMessage");
+
+        toast.classList.remove("toast-success", "toast-error");
+        if (type === "success") {
+          toast.classList.add("toast-success");
+          icon.textContent = "✅";
+        } else {
+          toast.classList.add("toast-error");
+          icon.textContent = "⚠️";
+        }
+        msg.textContent = message;
+
+        toast.classList.add("show");
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
+      }
+
+      // ===== DATA DUMMY KRS UNTUK DOSEN =====
+      const krsMahasiswa = [
+        {
+          nim: "842023012",
+          nama: "Rafael",
+          prodi: "Sistem Informasi",
+          sks: 22,
+          status: "pending",
+          matkul: [
+            {
+              kode: "SIM301",
+              nama: "Sistem Informasi Manajemen",
+              sks: 3,
+              jadwal: "Senin 08:00 - 10:00",
+            },
+            {
+              kode: "BDL304",
+              nama: "Basis Data Lanjut",
+              sks: 3,
+              jadwal: "Rabu 09:00 - 11:00",
+            },
+          ],
+        },
+        {
+          nim: "842023018",
+          nama: "Anita",
+          prodi: "Sistem Informasi",
+          sks: 20,
+          status: "pending",
+          matkul: [
+            {
+              kode: "WEB302",
+              nama: "Pemrograman Web",
+              sks: 3,
+              jadwal: "Senin 13:00 - 15:00",
+            },
+            {
+              kode: "BDL304",
+              nama: "Basis Data Lanjut",
+              sks: 3,
+              jadwal: "Rabu 09:00 - 11:00",
+            },
+          ],
+        },
+        {
+          nim: "842023010",
+          nama: "Budi",
+          prodi: "Sistem Informasi",
+          sks: 24,
+          status: "disetujui",
+          matkul: [],
+        },
+        {
+          nim: "842023011",
+          nama: "Sari",
+          prodi: "Sistem Informasi",
+          sks: 18,
+          status: "ditolak",
+          matkul: [],
+        },
+      ];
+
+      let selectedKrsNim = null;
+
+      function renderKrsList() {
+        const tbody = document.getElementById("krsListBody");
+        tbody.innerHTML = "";
+
+        const search = document
+          .getElementById("searchMahasiswa")
+          .value.toLowerCase();
+        const filterStatus = document.getElementById("filterStatusKRS").value;
+
+        let pendingCount = 0;
+
+        krsMahasiswa.forEach((mhs) => {
+          if (
+            search &&
+            !(
+              mhs.nim.toLowerCase().includes(search) ||
+              mhs.nama.toLowerCase().includes(search)
+            )
+          )
+            return;
+          if (filterStatus && mhs.status !== filterStatus) return;
+
+          if (mhs.status === "pending") pendingCount++;
+
+          const tr = document.createElement("tr");
+          let statusLabel = "";
+          if (mhs.status === "pending") {
+            statusLabel =
+              '<span class="badge-pill badge-warning">Menunggu</span>';
+          } else if (mhs.status === "disetujui") {
+            statusLabel =
+              '<span class="badge-pill badge-success">Disetujui</span>';
+          } else {
+            statusLabel = '<span class="badge-pill badge-muted">Ditolak</span>';
+          }
+
+          tr.innerHTML = `
+            <td>${mhs.nim}</td>
+            <td>${mhs.nama}</td>
+            <td>${mhs.prodi}</td>
+            <td>${mhs.sks}</td>
+            <td>${statusLabel}</td>
+            <td>
+              <button class="btn-mini" type="button" onclick="lihatDetailKRS('${mhs.nim}')">
+                Lihat
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        document.getElementById("krsPendingCount").textContent = pendingCount;
+        document.getElementById("krsPendingBadge").textContent = pendingCount;
+      }
+
+      function filterKrsList() {
+        renderKrsList();
+      }
+
+      function resetKrsFilterDosen() {
+        document.getElementById("searchMahasiswa").value = "";
+        document.getElementById("filterStatusKRS").value = "";
+        renderKrsList();
+      }
+
+      function lihatDetailKRS(nim) {
+        selectedKrsNim = nim;
+        const mhs = krsMahasiswa.find((m) => m.nim === nim);
+        if (!mhs) return;
+
+        const detailTitle = document.getElementById("detailTitle");
+        const detailInfo = document.getElementById("krsDetailInfo");
+        const tbody = document.getElementById("krsDetailBody");
+
+        detailTitle.textContent =
+          "KRS " + mhs.nama + " (" + mhs.nim + ") - " + mhs.sks + " SKS";
+        detailInfo.innerHTML =
+          "<div>Prodi: <strong>" +
+          mhs.prodi +
+          "</strong> • Status: <strong>" +
+          mhs.status.toUpperCase() +
+          "</strong></div>";
+
+        tbody.innerHTML = "";
+        if (!mhs.matkul || mhs.matkul.length === 0) {
+          tbody.innerHTML =
+            '<tr><td colspan="4">Detail mata kuliah belum disimulasikan (demo).</td></tr>';
+          return;
+        }
+
+        mhs.matkul.forEach((mk) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${mk.kode}</td>
+            <td>${mk.nama}</td>
+            <td>${mk.sks}</td>
+            <td>${mk.jadwal}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function approveSelectedKRS() {
+        if (!selectedKrsNim) {
+          showToast("error", "Pilih dulu mahasiswa yang akan divalidasi.");
+          return;
+        }
+        const mhs = krsMahasiswa.find((m) => m.nim === selectedKrsNim);
+        if (!mhs) return;
+
+        mhs.status = "disetujui";
+        showToast(
+          "success",
+          "KRS " + mhs.nama + " (" + mhs.nim + ") telah disetujui."
+        );
+        renderKrsList();
+        lihatDetailKRS(mhs.nim);
+      }
+
+      // ===== DATA NILAI DUMMY =====
+      const nilaiMahasiswaDummy = [
+        { nim: "842023012", nama: "Rafael", nilai: 85 },
+        { nim: "842023013", nama: "Eka", nilai: 78 },
+        { nim: "842023014", nama: "Steffen", nilai: 90 },
+        { nim: "842023015", nama: "William", nilai: 88 },
+      ];
+
+      function hitungGrade(nilai) {
+        if (nilai >= 85) return "A";
+        if (nilai >= 80) return "A-";
+        if (nilai >= 75) return "B+";
+        if (nilai >= 70) return "B";
+        if (nilai >= 65) return "C+";
+        if (nilai >= 60) return "C";
+        if (nilai >= 50) return "D";
+        return "E";
+      }
+
+      function loadNilaiMahasiswa() {
+        const tbody = document.getElementById("nilaiTableBody");
+        tbody.innerHTML = "";
+
+        nilaiMahasiswaDummy.forEach((mhs, idx) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${mhs.nim}</td>
+            <td>${mhs.nama}</td>
+            <td>
+              <input type="number" min="0" max="100" value="${
+                mhs.nilai
+              }" style="width:70px" onchange="updateGrade(this, ${idx})" />
+            </td>
+            <td id="grade-${idx}">${hitungGrade(mhs.nilai)}</td>
+            <td>
+              <button class="btn-mini" type="button" onclick="showToast('success','Nilai ${
+                mhs.nama
+              } disimpan (demo).')">
+                Simpan
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function updateGrade(input, idx) {
+        let nilai = parseInt(input.value, 10);
+        if (isNaN(nilai)) nilai = 0;
+        if (nilai < 0) nilai = 0;
+        if (nilai > 100) nilai = 100;
+        input.value = nilai;
+        document.getElementById("grade-" + idx).textContent =
+          hitungGrade(nilai);
+      }
+
+      // ===== PENGUMUMAN =====
+      function kirimPengumuman() {
+        const matkul = document.getElementById("pengumumanMatkul").value;
+        const judul = document.getElementById("pengumumanJudul").value.trim();
+        const isi = document.getElementById("pengumumanIsi").value.trim();
+
+        if (!judul || !isi) {
+          showToast("error", "Judul dan isi pengumuman tidak boleh kosong.");
+          return;
+        }
+
+        showToast(
+          "success",
+          "Pengumuman untuk " + matkul + " berhasil dikirim (demo)."
+        );
+
+        document.getElementById("pengumumanJudul").value = "";
+        document.getElementById("pengumumanIsi").value = "";
+      }
+
+      // INIT
+      document.addEventListener("DOMContentLoaded", () => {
+        renderKrsList();
+        loadNilaiMahasiswa();
+        showPage("dashboard");
+      });
     </script>
   </body>
 </html>
