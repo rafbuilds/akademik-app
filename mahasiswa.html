@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIASAT - Portal Mahasiswa</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Toggle for mobile -->
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰ Menu</button>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+  <div class="logo-section">
+    <div class="logo-badge">
+      <img
+        src="img/logo1.png"
+        alt="Foto Rafael"
+        class="logo-photo"
+      />
+    </div>
+    <div class="logo-text">
+      <h1>SIASAT</h1>
+      <p>Portal Akademik Mahasiswa</p>
+    </div>
+  </div>
+
+
+      <div class="profile-card">
+        <div class="profile-inner">
+          <div class="profile-avatar">👨‍🎓</div>
+          <div class="profile-meta">
+            <h2>Rafael Mahasiswa</h2>
+            <p>842023012 • Sistem Informasi</p>
+            <div class="status-chip">
+              <span>●</span> Aktif - Genap 2024/2025
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="menu">
+        <div class="menu-group">
+          <div class="menu-title">Menu Utama</div>
+          <div
+            class="menu-item active"
+            data-page="dashboard"
+            onclick="showPage('dashboard', this)"
+          >
+            <span class="icon">🏠</span>
+            <span class="label">Dashboard</span>
+          </div>
+          <div
+            class="menu-item"
+            data-page="krs"
+            onclick="showPage('krs', this)"
+          >
+            <span class="icon">📝</span>
+            <span class="label">KRS Online</span>
+            <span class="menu-badge">OPEN</span>
+          </div>
+          <div
+            class="menu-item"
+            data-page="nilai"
+            onclick="showPage('nilai', this)"
+          >
+            <span class="icon">📊</span>
+            <span class="label">Transkrip Nilai</span>
+          </div>
+          <div
+            class="menu-item"
+            data-page="jadwal"
+            onclick="showPage('jadwal', this)"
+          >
+            <span class="icon">📅</span>
+            <span class="label">Jadwal Kuliah</span>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <div class="menu-title">Keuangan & Presensi</div>
+          <div
+            class="menu-item"
+            data-page="pembayaran"
+            onclick="showPage('pembayaran', this)"
+          >
+            <span class="icon">💳</span>
+            <span class="label">Pembayaran</span>
+            <span class="menu-badge">2</span>
+          </div>
+          <div
+            class="menu-item"
+            data-page="presensi"
+            onclick="showPage('presensi', this)"
+          >
+            <span class="icon">✅</span>
+            <span class="label">Presensi</span>
+          </div>
+          <div
+            class="menu-item"
+            data-page="tugas"
+            onclick="showPage('tugas', this)"
+          >
+            <span class="icon">📄</span>
+            <span class="label">Tugas & Ujian</span>
+            <span class="menu-badge">5</span>
+          </div>
+          <div
+            class="menu-item"
+            data-page="pengumuman"
+            onclick="showPage('pengumuman', this)"
+          >
+            <span class="icon">📢</span>
+            <span class="label">Pengumuman</span>
+          </div>
+          <div
+            class="menu-item"
+            data-page="profil"
+            onclick="showPage('profil', this)"
+          >
+            <span class="icon">👤</span>
+            <span class="label">Profil Saya</span>
+          </div>
+        </div>
+      </nav>
+
+      <button class="logout-btn" onclick="logout()">
+        <span>🚪</span>Keluar dari SIASAT
+      </button>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <!-- DASHBOARD -->
+      <section id="page-dashboard" class="page active">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>Selamat datang, Rafael! 👋</h2>
+            <p>Ringkasan status akademik kamu semester ini.</p>
+          </div>
+          <div class="top-bar-right">
+            <span class="pill">Semester: Genap 2024/2025</span>
+            <span class="pill">Status: Aktif</span>
+            <button class="btn-top" onclick="showPage('krs')">
+              📝 Isi KRS
+            </button>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-inner">
+              <span class="stat-icon">🎓</span>
+              <div class="stat-label">IPK</div>
+              <div class="stat-value" id="ipkValue">3.75</div>
+              <div class="stat-extra">Target lulus: ≥ 3.50</div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 88%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-inner">
+              <span class="stat-icon">📚</span>
+              <div class="stat-label">Total SKS Lulus</div>
+              <div class="stat-value" id="sksLulus">142</div>
+              <div class="stat-extra">Dari 144 SKS kurikulum</div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 92%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-inner">
+              <span class="stat-icon">🕒</span>
+              <div class="stat-label">Kehadiran</div>
+              <div class="stat-value">96%</div>
+              <div class="stat-extra">Wajib ≥ 75% per mata kuliah</div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 96%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-inner">
+              <span class="stat-icon">💰</span>
+              <div class="stat-label">Status Keuangan</div>
+              <div class="stat-value">2 Tagihan</div>
+              <div class="stat-extra">Batas bayar: 28 Feb 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <div class="quick-card" onclick="showPage('krs')">
+            <span>📝</span>
+            <p>Isi / Edit KRS</p>
+          </div>
+          <div class="quick-card" onclick="showPage('nilai')">
+            <span>📊</span>
+            <p>Lihat Transkrip Nilai</p>
+          </div>
+          <div class="quick-card" onclick="showPage('pembayaran')">
+            <span>💳</span>
+            <p>Cek Tagihan SPP</p>
+          </div>
+          <div class="quick-card" onclick="showPage('jadwal')">
+            <span>📅</span>
+            <p>Jadwal Kuliah Hari Ini</p>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">📅 Jadwal Hari Ini</div>
+              <div class="card-link" onclick="showPage('jadwal')">
+                Lihat semua jadwal →
+              </div>
+            </div>
+
+            <div class="schedule-item">
+              <div class="schedule-time">08:00 - 10:00 • Senin</div>
+              <div class="schedule-course">
+                Sistem Informasi Manajemen (SIM301)
+              </div>
+              <div class="schedule-location">
+                📍 Ruang 301 • Dr. Ahmad Hidayat
+              </div>
+            </div>
+            <div class="schedule-item">
+              <div class="schedule-time">10:30 - 12:30 • Senin</div>
+              <div class="schedule-course">Basis Data Lanjut (BDL304)</div>
+              <div class="schedule-location">
+                💻 Lab Komputer 2 • Dr. Siti Nurhaliza
+              </div>
+            </div>
+            <div class="schedule-item">
+              <div class="schedule-time">13:00 - 15:00 • Senin</div>
+              <div class="schedule-course">Pemrograman Web (WEB302)</div>
+              <div class="schedule-location">
+                📍 Ruang 203 • Dr. Budi Santoso
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">📢 Pengumuman</div>
+              <div class="card-link" onclick="showPage('pengumuman')">
+                Lihat semua →
+              </div>
+            </div>
+
+            <div class="announcement">
+              <span class="announcement-badge badge-danger">PENTING</span>
+              <div class="announcement-title">Perpanjangan Pengisian KRS</div>
+              <div class="announcement-text">
+                Batas akhir pengisian KRS diperpanjang hingga 5 Maret 2025 pukul
+                23.59 WIB.
+              </div>
+            </div>
+
+            <div class="announcement">
+              <span class="announcement-badge badge-info">INFO KEUANGAN</span>
+              <div class="announcement-title">Konfirmasi Pembayaran SPP</div>
+              <div class="announcement-text">
+                Admin keuangan akan mengkonfirmasi pembayaran maksimal 1x24 jam
+                setelah bukti diunggah.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">📈 Nilai Terbaru</div>
+            <div class="card-link" onclick="showPage('nilai')">
+              Lihat transkrip →
+            </div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mata Kuliah</th>
+                  <th>SKS</th>
+                  <th>Nilai Angka</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Algoritma & Struktur Data</td>
+                  <td>3</td>
+                  <td>88</td>
+                  <td><span class="badge-pill badge-success">A</span></td>
+                </tr>
+                <tr>
+                  <td>Pemrograman Berorientasi Objek</td>
+                  <td>3</td>
+                  <td>85</td>
+                  <td><span class="badge-pill badge-success">A-</span></td>
+                </tr>
+                <tr>
+                  <td>Matematika Diskrit</td>
+                  <td>3</td>
+                  <td>78</td>
+                  <td><span class="badge-pill badge-warning">B+</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- KRS PAGE -->
+      <section id="page-krs" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>📝 Kartu Rencana Studi (KRS)</h2>
+            <p>
+              Atur mata kuliah yang akan kamu ambil pada Semester Genap
+              2024/2025.
+            </p>
+          </div>
+          <div class="top-bar-right">
+            <span class="pill">Periode KRS: 10 Feb – 05 Mar 2025</span>
+            <span class="pill">Status: <strong>DI BUKA</strong></span>
+          </div>
+        </div>
+
+        <div class="card krs-header-card">
+          <div class="card-header">
+            <div class="card-title">Ringkasan KRS Kamu</div>
+            <div class="card-link">
+              Data ditarik real-time dari server kampus
+            </div>
+          </div>
+          <div class="krs-header-grid">
+            <div class="krs-meta">
+              <span class="krs-meta-label">IPS Semester Lalu</span>
+              <span class="krs-meta-value" id="ipsValue">3.60</span>
+            </div>
+            <div class="krs-meta">
+              <span class="krs-meta-label">Maksimal SKS Boleh Diambil</span>
+              <span class="krs-meta-value" id="maxSksLabel">24 SKS</span>
+            </div>
+            <div class="krs-meta">
+              <span class="krs-meta-label">Total SKS Terpilih</span>
+              <span class="krs-meta-value"
+                ><span id="currentSks">0</span> SKS</span
+              >
+            </div>
+            <div class="krs-meta">
+              <span class="krs-meta-label">Status Validasi Dosen Wali</span>
+              <span class="krs-meta-value" id="validasiStatus"
+                >Belum Divalidasi</span
+              >
+            </div>
+          </div>
+
+          <div class="krs-sks-summary">
+            <div class="sks-number" id="sksSummaryNumber">0</div>
+            <div>
+              <div class="sks-caption">Total SKS yang sudah kamu pilih</div>
+              <div class="progress-bar" style="margin-top: 0.3rem">
+                <div class="progress-fill" id="sksProgress"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="krs-layout">
+          <!-- KIRI: DAFTAR MATA KULIAH -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">📚 Daftar Mata Kuliah Ditawarkan</div>
+              <div class="card-link">
+                Data kelas disusun oleh Admin Akademik & Keuangan
+              </div>
+            </div>
+            <div class="krs-controls">
+              <input
+                type="text"
+                class="input-small"
+                id="searchMatkul"
+                placeholder="Cari kode / nama mata kuliah..."
+                oninput="renderCourseTable()"
+              />
+              <select
+                id="filterHari"
+                class="input-small"
+                onchange="renderCourseTable()"
+              >
+                <option value="">Filter Hari</option>
+                <option>Senin</option>
+                <option>Selasa</option>
+                <option>Rabu</option>
+                <option>Kamis</option>
+                <option>Jumat</option>
+              </select>
+              <select
+                id="filterProdi"
+                class="input-small"
+                onchange="renderCourseTable()"
+              >
+                <option value="">Semua Program Studi</option>
+                <option>Sistem Informasi</option>
+                <option>Informatika</option>
+                <option>Manajemen</option>
+              </select>
+              <button class="btn-mini" type="button" onclick="resetKrsFilter()">
+                Reset
+              </button>
+            </div>
+
+            <div class="table-container krs-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Kode</th>
+                    <th>Mata Kuliah</th>
+                    <th>SKS</th>
+                    <th>Kelas</th>
+                    <th>Jadwal</th>
+                    <th>Kuota</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="courseTableBody"></tbody>
+              </table>
+            </div>
+
+            <div class="krs-info-card">
+              <strong>Keterangan:</strong>
+              <ul>
+                <li>
+                  Admin Akademik bertugas membuka kelas, mengatur kuota, dan
+                  jadwal sesuai kapasitas ruangan.
+                </li>
+                <li>
+                  Admin Keuangan memastikan hanya mahasiswa dengan status
+                  keuangan <em>lunas / sesuai ketentuan</em> yang bisa
+                  finalisasi KRS.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- KANAN: KRS SAYA -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">📋 KRS Saya</div>
+              <button class="btn-small" type="button" onclick="finalizeKRS()">
+                💾 Simpan / Ajukan Validasi
+              </button>
+            </div>
+
+            <div class="table-container krs-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Kode</th>
+                    <th>Mata Kuliah</th>
+                    <th>SKS</th>
+                    <th>Jadwal</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="krsTableBody">
+                  <!-- terisi dari JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="krs-info-card">
+              <div>
+                <strong>Info:</strong>
+              </div>
+              <ul>
+                <li>
+                  Sistem otomatis mengecek <strong>bentrok jadwal</strong> dan
+                  <strong>batas SKS</strong>.
+                </li>
+                <li>
+                  Setelah diajukan, Dosen Wali & Admin akan memeriksa KRS kamu.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NILAI -->
+      <section id="page-nilai" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>📊 Transkrip Nilai</h2>
+            <p>Rekap seluruh nilai mata kuliah yang sudah kamu tempuh.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Ringkasan Nilai</div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kode</th>
+                  <th>Mata Kuliah</th>
+                  <th>SKS</th>
+                  <th>Semester</th>
+                  <th>Nilai</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Contoh statis -->
+                <tr>
+                  <td>ALGO201</td>
+                  <td>Algoritma & Struktur Data</td>
+                  <td>3</td>
+                  <td>3</td>
+                  <td>88</td>
+                  <td><span class="badge-pill badge-success">A</span></td>
+                </tr>
+                <tr>
+                  <td>PBO202</td>
+                  <td>Pemrograman Berorientasi Objek</td>
+                  <td>3</td>
+                  <td>3</td>
+                  <td>85</td>
+                  <td><span class="badge-pill badge-success">A-</span></td>
+                </tr>
+                <tr>
+                  <td>MDIS101</td>
+                  <td>Matematika Diskrit</td>
+                  <td>3</td>
+                  <td>2</td>
+                  <td>78</td>
+                  <td><span class="badge-pill badge-warning">B+</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- JADWAL -->
+      <section id="page-jadwal" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>📅 Jadwal Kuliah</h2>
+            <p>Jadwal lengkap mata kuliah yang kamu ambil minggu ini.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              Jadwal Mingguan (berdasarkan KRS yang disetujui)
+            </div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Hari</th>
+                  <th>Waktu</th>
+                  <th>Kode</th>
+                  <th>Mata Kuliah</th>
+                  <th>Ruang</th>
+                  <th>Dosen</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Senin</td>
+                  <td>08:00 - 10:00</td>
+                  <td>SIM301</td>
+                  <td>Sistem Informasi Manajemen</td>
+                  <td>R. 301</td>
+                  <td>Dr. Ahmad Hidayat</td>
+                </tr>
+                <tr>
+                  <td>Senin</td>
+                  <td>10:30 - 12:30</td>
+                  <td>BDL304</td>
+                  <td>Basis Data Lanjut</td>
+                  <td>Lab Komputer 2</td>
+                  <td>Dr. Siti Nurhaliza</td>
+                </tr>
+                <tr>
+                  <td>Senin</td>
+                  <td>13:00 - 15:00</td>
+                  <td>WEB302</td>
+                  <td>Pemrograman Web</td>
+                  <td>R. 203</td>
+                  <td>Dr. Budi Santoso</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PEMBAYARAN -->
+      <section id="page-pembayaran" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>💳 Pembayaran & Keuangan</h2>
+            <p>
+              Admin keuangan mengelola tagihan dan verifikasi pembayaran kamu.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Tagihan Aktif</div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Jenis Tagihan</th>
+                  <th>Periode</th>
+                  <th>Jumlah</th>
+                  <th>Jatuh Tempo</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>SPP Semester Genap</td>
+                  <td>2024/2025</td>
+                  <td>Rp 7.500.000</td>
+                  <td>28 Feb 2025</td>
+                  <td>
+                    <span class="badge-pill badge-warning"
+                      >Menunggu Pembayaran</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td>SKS Tambahan</td>
+                  <td>2024/2025</td>
+                  <td>Rp 1.200.000</td>
+                  <td>28 Feb 2025</td>
+                  <td>
+                    <span class="badge-pill badge-muted"
+                      >Menunggu Konfirmasi Admin</span
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="placeholder">
+            Untuk unggah bukti bayar & melihat riwayat, hubungi portal Admin
+            (role Admin).
+          </div>
+        </div>
+      </section>
+
+      <!-- PRESENSI -->
+      <section id="page-presensi" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>✅ Presensi</h2>
+            <p>Monitoring kehadiran berdasarkan sistem presensi kampus.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="placeholder">
+            Di sini nanti bisa dibuat grafik kehadiran per mata kuliah & QR
+            history.
+          </div>
+        </div>
+      </section>
+
+      <!-- TUGAS -->
+      <section id="page-tugas" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>📄 Tugas & Ujian</h2>
+            <p>Ringkasan tugas yang diberikan dosen dan jadwal ujian.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="placeholder">
+            Di halaman ini bisa ditambahkan daftar tugas dari LMS / e-learning
+            kampus.
+          </div>
+        </div>
+      </section>
+
+      <!-- PENGUMUMAN -->
+      <section id="page-pengumuman" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>📢 Pengumuman</h2>
+            <p>Informasi penting dari fakultas, admin, dan dosen wali.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="placeholder">
+            Di sini akan menampilkan list pengumuman lengkap dengan filter
+            kategori (Akademik, Keuangan, Event, dll).
+          </div>
+        </div>
+      </section>
+
+      <!-- PROFIL -->
+      <section id="page-profil" class="page">
+        <div class="top-bar">
+          <div class="page-title-block">
+            <h2>👤 Profil Mahasiswa</h2>
+            <p>Data pribadi, orang tua, dan kontak darurat.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="placeholder">
+            Di sini bisa dibuat form edit profil, upload foto, dan lain-lain.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast">
+      <span id="toastIcon" class="toast-icon">ℹ️</span>
+      <span id="toastMessage"></span>
+    </div>
+
+    <script>
+      // ========== NAV / PAGE SWITCHING ==========
+      function showPage(pageId, el) {
+        document
+          .querySelectorAll(".page")
+          .forEach((p) => p.classList.remove("active"));
+        document.getElementById("page-" + pageId).classList.add("active");
+
+        document
+          .querySelectorAll(".menu-item")
+          .forEach((mi) => mi.classList.remove("active"));
+        if (el) {
+          el.classList.add("active");
+        } else {
+          const target = document.querySelector(
+            '.menu-item[data-page="' + pageId + '"]'
+          );
+          if (target) target.classList.add("active");
+        }
+
+        // close sidebar on mobile
+        document.getElementById("sidebar").classList.remove("open");
+      }
+
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("open");
+      }
+
+      function logout() {
+        window.location.href = "login.html";
+      }
+
+      // ========== DATA KRS ==========
+      const maxSKS = 24;
+      const courses = [
+        {
+          kode: "SIM301",
+          nama: "Sistem Informasi Manajemen",
+          sks: 3,
+          kelas: "A",
+          hari: "Senin",
+          jamMulai: "08:00",
+          jamSelesai: "10:00",
+          ruang: "R. 301",
+          prodi: "Sistem Informasi",
+          kuota: 35,
+          terisi: 31,
+        },
+        {
+          kode: "BDL304",
+          nama: "Basis Data Lanjut",
+          sks: 3,
+          kelas: "B",
+          hari: "Senin",
+          jamMulai: "10:30",
+          jamSelesai: "12:30",
+          ruang: "Lab Komputer 2",
+          prodi: "Sistem Informasi",
+          kuota: 30,
+          terisi: 29,
+        },
+        {
+          kode: "WEB302",
+          nama: "Pemrograman Web",
+          sks: 3,
+          kelas: "A",
+          hari: "Senin",
+          jamMulai: "13:00",
+          jamSelesai: "15:00",
+          ruang: "R. 203",
+          prodi: "Informatika",
+          kuota: 40,
+          terisi: 38,
+        },
+        {
+          kode: "PAI101",
+          nama: "Pendidikan Agama",
+          sks: 2,
+          kelas: "C",
+          hari: "Selasa",
+          jamMulai: "08:00",
+          jamSelesai: "09:40",
+          ruang: "R. 105",
+          prodi: "Manajemen",
+          kuota: 45,
+          terisi: 44,
+        },
+        {
+          kode: "UIUX210",
+          nama: "Desain UI/UX",
+          sks: 3,
+          kelas: "A",
+          hari: "Rabu",
+          jamMulai: "09:00",
+          jamSelesai: "11:00",
+          ruang: "Studio Desain",
+          prodi: "Informatika",
+          kuota: 25,
+          terisi: 19,
+        },
+        {
+          kode: "RPL401",
+          nama: "Rekayasa Perangkat Lunak",
+          sks: 4,
+          kelas: "A",
+          hari: "Kamis",
+          jamMulai: "13:00",
+          jamSelesai: "16:00",
+          ruang: "R. 402",
+          prodi: "Sistem Informasi",
+          kuota: 35,
+          terisi: 35,
+        },
+      ];
+
+      let selectedKrs = [];
+
+      function timeToMinutes(t) {
+        const [h, m] = t.split(":").map(Number);
+        return h * 60 + m;
+      }
+
+      function isConflicting(course, other) {
+        if (course.hari !== other.hari) return false;
+        const startA = timeToMinutes(course.jamMulai);
+        const endA = timeToMinutes(course.jamSelesai);
+        const startB = timeToMinutes(other.jamMulai);
+        const endB = timeToMinutes(other.jamSelesai);
+        return startA < endB && startB < endA;
+      }
+
+      function renderCourseTable() {
+        const tbody = document.getElementById("courseTableBody");
+        tbody.innerHTML = "";
+
+        const search = document
+          .getElementById("searchMatkul")
+          .value.toLowerCase();
+        const hari = document.getElementById("filterHari").value;
+        const prodi = document.getElementById("filterProdi").value;
+
+        courses.forEach((course) => {
+          if (
+            search &&
+            !(
+              course.kode.toLowerCase().includes(search) ||
+              course.nama.toLowerCase().includes(search)
+            )
+          ) {
+            return;
+          }
+          if (hari && course.hari !== hari) return;
+          if (prodi && course.prodi !== prodi) return;
+
+          const tr = document.createElement("tr");
+          const isSelected = selectedKrs.some(
+            (c) => c.kode === course.kode && c.kelas === course.kelas
+          );
+
+          const isFull = course.terisi >= course.kuota;
+          const hasConflict = selectedKrs.some((c) => isConflicting(course, c));
+
+          tr.innerHTML = `
+            <td>${course.kode}</td>
+            <td>${course.nama}</td>
+            <td>${course.sks}</td>
+            <td>${course.kelas}</td>
+            <td>${
+              course.hari
+            }<br><span style="color:#9ca3af;font-size:0.75rem">${
+            course.jamMulai
+          } - ${course.jamSelesai}</span></td>
+            <td>${course.terisi}/${course.kuota}</td>
+            <td>
+              ${
+                isFull
+                  ? '<span class="chip chip-penuh">Penuh</span>'
+                  : hasConflict
+                  ? '<span class="chip chip-bentrok">Bentrok</span>'
+                  : '<span class="chip chip-oke">Tersedia</span>'
+              }
+            </td>
+            <td class="actions">
+              ${
+                isSelected
+                  ? '<button class="btn-table btn-remove" type="button" onclick="removeFromKRS(\'' +
+                    course.kode +
+                    "')\">Hapus</button>"
+                  : '<button class="btn-table btn-add" type="button" onclick="addToKRS(\'' +
+                    course.kode +
+                    "')\">Tambah</button>"
+              }
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function renderKrsTable() {
+        const tbody = document.getElementById("krsTableBody");
+        tbody.innerHTML = "";
+
+        selectedKrs.forEach((course) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${course.kode}</td>
+            <td>${course.nama}</td>
+            <td>${course.sks}</td>
+            <td>${course.hari} ${course.jamMulai} - ${course.jamSelesai}</td>
+            <td>
+              <button class="btn-table btn-remove" type="button" onclick="removeFromKRS('${course.kode}')">
+                Hapus
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        const total = selectedKrs.reduce((sum, c) => sum + c.sks, 0);
+        document.getElementById("currentSks").textContent = total;
+        document.getElementById("sksSummaryNumber").textContent = total;
+        document.getElementById("sksProgress").style.width =
+          Math.min((total / maxSKS) * 100, 100) + "%";
+      }
+
+      function addToKRS(kode) {
+        const course = courses.find((c) => c.kode === kode);
+        if (!course) return;
+
+        if (selectedKrs.some((c) => c.kode === course.kode)) {
+          showToast("error", "Mata kuliah ini sudah ada di KRS kamu.");
+          return;
+        }
+
+        if (course.terisi >= course.kuota) {
+          showToast(
+            "error",
+            "Kuota kelas sudah penuh. Silakan hubungi Admin Akademik."
+          );
+          return;
+        }
+
+        const totalSKS =
+          selectedKrs.reduce((sum, c) => sum + c.sks, 0) + course.sks;
+        if (totalSKS > maxSKS) {
+          showToast(
+            "error",
+            "Total SKS melebihi batas maksimal (" + maxSKS + " SKS)."
+          );
+          return;
+        }
+
+        const conflict = selectedKrs.find((c) => isConflicting(course, c));
+        if (conflict) {
+          showToast(
+            "error",
+            "Jadwal bentrok dengan " +
+              conflict.kode +
+              " (" +
+              conflict.hari +
+              " " +
+              conflict.jamMulai +
+              "-" +
+              conflict.jamSelesai +
+              ")."
+          );
+          return;
+        }
+
+        selectedKrs.push(course);
+        renderKrsTable();
+        renderCourseTable();
+        showToast("success", "Mata kuliah berhasil ditambahkan ke KRS.");
+      }
+
+      function removeFromKRS(kode) {
+        selectedKrs = selectedKrs.filter((c) => c.kode !== kode);
+        renderKrsTable();
+        renderCourseTable();
+        showToast("success", "Mata kuliah dihapus dari KRS.");
+      }
+
+      function resetKrsFilter() {
+        document.getElementById("searchMatkul").value = "";
+        document.getElementById("filterHari").value = "";
+        document.getElementById("filterProdi").value = "";
+        renderCourseTable();
+      }
+
+      function finalizeKRS() {
+        if (selectedKrs.length === 0) {
+          showToast("error", "KRS masih kosong. Tambahkan mata kuliah dulu.");
+          return;
+        }
+        const total = selectedKrs.reduce((sum, c) => sum + c.sks, 0);
+        showToast(
+          "success",
+          "KRS dengan total " +
+            total +
+            " SKS diajukan. Menunggu validasi Dosen Wali & Admin."
+        );
+        document.getElementById("validasiStatus").textContent =
+          "Menunggu Validasi Dosen Wali";
+      }
+
+      // TOAST
+      let toastTimeout;
+      function showToast(type, message) {
+        const toast = document.getElementById("toast");
+        const icon = document.getElementById("toastIcon");
+        const msg = document.getElementById("toastMessage");
+
+        toast.classList.remove("toast-success", "toast-error");
+        if (type === "success") {
+          toast.classList.add("toast-success");
+          icon.textContent = "✅";
+        } else {
+          toast.classList.add("toast-error");
+          icon.textContent = "⚠️";
+        }
+        msg.textContent = message;
+
+        toast.classList.add("show");
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3500);
+      }
+
+      // INIT
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("maxSksLabel").textContent = maxSKS + " SKS";
+        renderCourseTable();
+        renderKrsTable();
+      });
+    </script>
+  </body>
+</html>
