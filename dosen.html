@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIASAT - Portal Dosen</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="header-content">
+        <div class="header-title">
+          <!-- Tombol Logout -->
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <div>
+            <h1>SIASAT - Portal Dosen</h1>
+            <p>Universitas Kristen Satya Wacana</p>
+          </div>
+          <div style="margin-left: auto">
+            <button
+              onclick="logout()"
+              class="btn btn-danger"
+              style="
+                padding: 8px 16px;
+                border-radius: 8px;
+                background: #dc2626;
+                color: white;
+                border: none;
+                cursor: pointer;
+              "
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-content">
+        <button class="nav-button active" onclick="showPage('home')">
+          🏠 Beranda
+        </button>
+        <button class="nav-button" onclick="showPage('nilai')">
+          📝 Nilai Ujian
+        </button>
+        <button class="nav-button" onclick="showPage('jadwal')">
+          📅 Jadwal Mengajar
+        </button>
+        <button class="nav-button" onclick="showPage('pengumuman')">
+          📢 Pengumuman
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+      <!-- HOME -->
+      <div id="page-home" class="page">
+        <div class="home-container">
+          <h1 class="home-title">Selamat Datang, Dosen</h1>
+          <p class="home-subtitle">
+            Kelola nilai ujian, jadwal mengajar, dan pengumuman kelas dalam satu
+            portal.
+          </p>
+
+          <div class="menu-grid">
+            <div class="menu-card green" onclick="showPage('nilai')">
+              <div style="font-size: 2rem; margin-bottom: 0.5rem">📝</div>
+              <div>Input Nilai Ujian</div>
+            </div>
+
+            <div class="menu-card teal" onclick="showPage('jadwal')">
+              <div style="font-size: 2rem; margin-bottom: 0.5rem">📅</div>
+              <div>Jadwal Mengajar</div>
+            </div>
+
+            <div class="menu-card purple" onclick="showPage('pengumuman')">
+              <div style="font-size: 2rem; margin-bottom: 0.5rem">📢</div>
+              <div>Pengumuman Kelas</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>Ringkasan Mengajar Hari Ini</h3>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Jam</th>
+                  <th>Mata Kuliah</th>
+                  <th>Kelas</th>
+                  <th>Ruangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>08:00 - 10:00</td>
+                  <td>Sistem Informasi</td>
+                  <td>SI-3A</td>
+                  <td>R.101</td>
+                </tr>
+                <tr>
+                  <td>13:00 - 15:00</td>
+                  <td>Pemrograman Web</td>
+                  <td>SI-3B</td>
+                  <td>R.203</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- NILAI UJIAN -->
+      <div id="page-nilai" class="page hidden">
+        <h2 class="page-title">Input Nilai Ujian</h2>
+
+        <div class="form-card">
+          <div class="form-group">
+            <label>Mata Kuliah</label>
+            <select class="form-control">
+              <option>Sistem Informasi</option>
+              <option>Basis Data</option>
+              <option>Pemrograman Web</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Jenis Ujian</label>
+            <select class="form-control">
+              <option>UTS</option>
+              <option>UAS</option>
+              <option>Kuis</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>Daftar Mahasiswa</h3>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>NIM</th>
+                  <th>Nama Mahasiswa</th>
+                  <th>Nilai</th>
+                  <th class="text-center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>842023012</td>
+                  <td>Rafael</td>
+                  <td>
+                    <input
+                      type="number"
+                      class="form-control"
+                      min="0"
+                      max="100"
+                    />
+                  </td>
+                  <td class="text-center">
+                    <button
+                      class="btn btn-success"
+                      onclick="alert('Nilai disimpan (demo)')"
+                    >
+                      Simpan
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>842023013</td>
+                  <td>Eka</td>
+                  <td>
+                    <input
+                      type="number"
+                      class="form-control"
+                      min="0"
+                      max="100"
+                    />
+                  </td>
+                  <td class="text-center">
+                    <button
+                      class="btn btn-success"
+                      onclick="alert('Nilai disimpan (demo)')"
+                    >
+                      Simpan
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>842023015</td>
+                  <td>Steffen</td>
+                  <td>
+                    <input
+                      type="number"
+                      class="form-control"
+                      min="0"
+                      max="100"
+                    />
+                  </td>
+                  <td class="text-center">
+                    <button
+                      class="btn btn-success"
+                      onclick="alert('Nilai disimpan (demo)')"
+                    >
+                      Simpan
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>842023016</td>
+                  <td>William</td>
+                  <td>
+                    <input
+                      type="number"
+                      class="form-control"
+                      min="0"
+                      max="100"
+                    />
+                  </td>
+                  <td class="text-center">
+                    <button
+                      class="btn btn-success"
+                      onclick="alert('Nilai disimpan (demo)')"
+                    >
+                      Simpan
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- JADWAL MENGAJAR -->
+      <div id="page-jadwal" class="page hidden">
+        <h2 class="page-title">Jadwal Mengajar</h2>
+
+        <div class="form-card">
+          <h3>Jadwal Aktif</h3>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Hari</th>
+                  <th>Waktu</th>
+                  <th>Mata Kuliah</th>
+                  <th>Kelas</th>
+                  <th>Ruangan</th>
+                  <th class="text-center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Senin</td>
+                  <td>08:00 - 10:00</td>
+                  <td>Sistem Informasi</td>
+                  <td>SI-3A</td>
+                  <td>R.101</td>
+                  <td class="text-center">
+                    <button
+                      class="btn btn-warning"
+                      onclick="alert('Edit jadwal (demo)')"
+                    >
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Rabu</td>
+                  <td>13:00 - 15:00</td>
+                  <td>Pemrograman Web</td>
+                  <td>SI-3B</td>
+                  <td>R.203</td>
+                  <td class="text-center">
+                    <button
+                      class="btn btn-warning"
+                      onclick="alert('Edit jadwal (demo)')"
+                    >
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>Tambah Jadwal Mengajar</h3>
+          <div class="form-group">
+            <label>Hari</label>
+            <select class="form-control">
+              <option>Senin</option>
+              <option>Selasa</option>
+              <option>Rabu</option>
+              <option>Kamis</option>
+              <option>Jumat</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Waktu</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Contoh: 10:00 - 12:00"
+            />
+          </div>
+          <div class="form-group">
+            <label>Mata Kuliah</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nama mata kuliah"
+            />
+          </div>
+          <div class="form-group">
+            <label>Kelas</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Contoh: SI-3A"
+            />
+          </div>
+          <div class="form-group">
+            <label>Ruangan</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Contoh: R.202 / Lab Komputer"
+            />
+          </div>
+          <button
+            class="btn btn-primary"
+            type="button"
+            onclick="alert('Jadwal ditambahkan (demo)!')"
+          >
+            Tambah Jadwal
+          </button>
+        </div>
+      </div>
+
+      <!-- PENGUMUMAN -->
+      <div id="page-pengumuman" class="page hidden">
+        <h2 class="page-title">Pengumuman Kelas</h2>
+
+        <div class="form-card">
+          <div class="form-group">
+            <label>Mata Kuliah</label>
+            <select class="form-control">
+              <option>Sistem Informasi</option>
+              <option>Basis Data</option>
+              <option>Pemrograman Web</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Judul Pengumuman</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Contoh: Perubahan Jadwal Kuliah"
+            />
+          </div>
+          <div class="form-group">
+            <label>Isi Pengumuman</label>
+            <textarea
+              class="form-control"
+              rows="4"
+              placeholder="Tulis pengumuman di sini..."
+            ></textarea>
+          </div>
+          <button
+            class="btn btn-primary"
+            type="button"
+            onclick="alert('Pengumuman dikirim (demo)!')"
+          >
+            Kirim Pengumuman
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Sistem Informasi Akademik. UKSW. All rights reserved.</p>
+      <p class="footer-subtitle">Demo Version - Portal Dosen</p>
+    </footer>
+
+    <script>
+      function showPage(pageName) {
+        // Sembunyikan semua page
+        const pages = document.querySelectorAll(".page");
+        pages.forEach((page) => page.classList.add("hidden"));
+
+        // Tampilkan page yang dipilih
+        document.getElementById("page-" + pageName).classList.remove("hidden");
+
+        // Update nav aktif (kalau klik dari nav)
+        const navButtons = document.querySelectorAll(".nav-button");
+        navButtons.forEach((btn) => btn.classList.remove("active"));
+        if (event && event.target.classList.contains("nav-button")) {
+          event.target.classList.add("active");
+        }
+
+        // Scroll ke atas
+        window.scrollTo(0, 0);
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        showPage("home");
+      });
+      function showPage(pageName) {
+        const pages = document.querySelectorAll(".page");
+        pages.forEach((page) => page.classList.add("hidden"));
+        document.getElementById("page-" + pageName).classList.remove("hidden");
+
+        const navButtons = document.querySelectorAll(".nav-button");
+        navButtons.forEach((btn) => btn.classList.remove("active"));
+        if (event && event.target.classList.contains("nav-button")) {
+          event.target.classList.add("active");
+        }
+        window.scrollTo(0, 0);
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        showPage("home");
+      });
+
+      // Fungsi Logout
+      function logout() {
+        window.location.href = "login.html";
+      }
+    </script>
+  </body>
+</html>

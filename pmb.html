@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pendaftaran Mahasiswa Baru</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      .center-box {
+        margin: 3rem auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ========================= -->
+    <!-- STEP 1: FORM PENDAFTARAN -->
+    <!-- ========================= -->
+    <div id="step1" class="center-box">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/id/4/45/Logo_UKSW.png"
+        class="logo"
+      />
+
+      <h1 class="title">Pendaftaran Mahasiswa Baru</h1>
+      <p class="subtitle">Tahap 1: Isi Form Pendaftaran</p>
+
+      <div class="form-group">
+        <label>Nama Lengkap</label>
+        <input type="text" class="form-control" placeholder="Nama lengkap" />
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="email@example.com"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Nomor Telepon</label>
+        <input type="text" class="form-control" placeholder="Nomor telepon" />
+      </div>
+
+      <button class="btn btn-primary" onclick="nextStep(2)">Lanjutkan</button>
+    </div>
+
+    <!-- ========================= -->
+    <!-- STEP 2: UPLOAD DOKUMEN -->
+    <!-- ========================= -->
+    <div id="step2" class="center-box hidden">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/id/4/45/Logo_UKSW.png"
+        class="logo"
+      />
+
+      <h1 class="title">Upload Dokumen</h1>
+      <p class="subtitle">Tahap 2: Upload Dokumen Persyaratan</p>
+
+      <div class="form-group">
+        <label>Scan Ijazah / Raport</label>
+        <input type="file" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label>Scan KTP / Kartu Pelajar</label>
+        <input type="file" class="form-control" />
+      </div>
+
+      <button class="btn btn-primary" onclick="nextStep(3)">Lanjutkan</button>
+      <button class="btn btn-warning" onclick="nextStep(1)">Kembali</button>
+    </div>
+
+    <!-- ========================= -->
+    <!-- STEP 3: PEMBAYARAN -->
+    <!-- ========================= -->
+    <div id="step3" class="center-box hidden">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/id/4/45/Logo_UKSW.png"
+        class="logo"
+      />
+
+      <h1 class="title">Pembayaran</h1>
+      <p class="subtitle">Tahap 3: Pilih Metode Pembayaran</p>
+
+      <div class="form-group">
+        <label>Pilih Metode Pembayaran</label>
+        <select
+          id="metodePembayaran"
+          class="form-control"
+          onchange="tampilkanPembayaran()"
+        >
+          <option value="">-- Pilih --</option>
+          <option value="bank">Transfer Bank</option>
+          <option value="va">Virtual Account</option>
+          <option value="ewallet">E-Wallet</option>
+        </select>
+      </div>
+
+      <!-- Detail Pembayaran -->
+      <div id="detailPembayaran" class="step-box hidden">
+        <h3 style="margin-top: 0">Detail Pembayaran</h3>
+        <p><strong>Nominal:</strong> Rp 250.000</p>
+        <p id="infoPembayaran"></p>
+
+        <button class="btn btn-success" onclick="konfirmasiPembayaran()">
+          Konfirmasi Pembayaran
+        </button>
+      </div>
+
+      <button class="btn btn-warning" onclick="nextStep(2)">Kembali</button>
+    </div>
+
+    <!-- ========================= -->
+    <!-- STEP 4: STATUS DITERIMA -->
+    <!-- ========================= -->
+    <div id="step4" class="center-box hidden">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/id/4/45/Logo_UKSW.png"
+        class="logo"
+      />
+
+      <h1 class="title">Status Pendaftaran</h1>
+      <p class="subtitle">Tahap 4: Status Diterima</p>
+
+      <div
+        class="step-box"
+        style="background: #dcfce7; border: 1px solid #22c55e"
+      >
+        <h3 style="margin: 0; color: #166534">SELAMAT!</h3>
+        <p style="margin-top: 0.5rem">
+          Anda <strong>DITERIMA</strong> sebagai mahasiswa baru UKSW.<br />
+          Silakan menunggu informasi jadwal daftar ulang dan KRS.
+        </p>
+      </div>
+
+      <button
+        class="btn btn-primary"
+        onclick="window.location.href='login.html'"
+      >
+        Kembali ke Login
+      </button>
+    </div>
+
+    <script>
+      function tampilkanPembayaran() {
+        let metode = document.getElementById("metodePembayaran").value;
+        let detailDiv = document.getElementById("detailPembayaran");
+        let info = document.getElementById("infoPembayaran");
+
+        if (metode === "") {
+          detailDiv.classList.add("hidden");
+          return;
+        }
+
+        detailDiv.classList.remove("hidden");
+
+        if (metode === "bank") {
+          info.innerHTML = `
+        <strong>Nomor Rekening:</strong><br>
+        BCA – 1234567890 a/n UKSW<br><br>
+        Upload bukti transfer setelah melakukan pembayaran.
+      `;
+        }
+
+        if (metode === "va") {
+          info.innerHTML = `
+        <strong>Virtual Account:</strong><br>
+        88321 9988 1122 3344<br><br>
+        VA berlaku 24 jam.
+      `;
+        }
+
+        if (metode === "ewallet") {
+          info.innerHTML = `
+        <strong>QRIS Pembayaran:</strong><br>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=170x170&data=UKSW-PMB-250000" style="border-radius:8px;">
+        <br><br>
+        Scan menggunakan Dana / OVO / Gopay.
+      `;
+        }
+      }
+
+      function konfirmasiPembayaran() {
+        let detailDiv = document.getElementById("detailPembayaran");
+
+        detailDiv.innerHTML = `
+      <p style="text-align:center; font-weight:bold;">Memproses pembayaran...</p>
+      <img src="https://i.gifer.com/ZZ5H.gif" width="60" style="margin-top:10px;">
+    `;
+
+        setTimeout(() => {
+          nextStep(4);
+        }, 2000);
+      }
+
+      function nextStep(step) {
+        for (let i = 1; i <= 4; i++) {
+          document.getElementById("step" + i).classList.add("hidden");
+        }
+        document.getElementById("step" + step).classList.remove("hidden");
+        window.scrollTo(0, 0);
+      }
+    </script>
+  </body>
+</html>

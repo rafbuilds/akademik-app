@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login SIASAT</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <style>
+    .center-box {
+      margin: 3rem auto;
+    }
+  </style>
+  <body>
+    <!-- ========================= -->
+    <!-- LOGIN PAGE -->
+    <!-- ========================= -->
+    <div id="page-login" class="center-box">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/id/4/45/Logo_UKSW.png"
+        class="logo"
+      />
+
+      <h1 class="title">Portal SIASAT</h1>
+      <p class="subtitle">Silakan login untuk melanjutkan</p>
+
+      <div class="form-group">
+        <label>Login sebagai</label>
+        <select
+          id="roleSelect"
+          class="form-control"
+          onchange="toggleLoginRole()"
+        >
+          <option value="mahasiswa">Mahasiswa</option>
+          <option value="dosen">Dosen</option>
+        </select>
+      </div>
+
+      <!-- Login Mahasiswa -->
+      <div id="login-mahasiswa-fields">
+        <div class="form-group">
+          <label>NIM</label>
+          <input type="text" class="form-control" placeholder="Masukkan NIM" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Masukkan password"
+          />
+        </div>
+        <button class="btn btn-primary" onclick="masukMahasiswa()">
+          Masuk Mahasiswa
+        </button>
+      </div>
+
+      <!-- Login Dosen -->
+      <div id="login-dosen-fields" class="hidden">
+        <div class="form-group">
+          <label>NIDN / ID Dosen</label>
+          <input type="text" class="form-control" placeholder="Masukkan NIDN" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Masukkan password"
+          />
+        </div>
+        <button class="btn btn-success" onclick="masukDosenDemo()">
+          Masuk Dosen
+        </button>
+      </div>
+
+      <span class="link-btn" onclick="bukaPMB()"
+        >Pendaftaran Mahasiswa Baru</span
+      >
+    </div>
+
+    <script>
+      function toggleLoginRole() {
+        const role = document.getElementById("roleSelect").value;
+
+        document
+          .getElementById("login-mahasiswa-fields")
+          .classList.toggle("hidden", role !== "mahasiswa");
+        document
+          .getElementById("login-dosen-fields")
+          .classList.toggle("hidden", role !== "dosen");
+      }
+
+      function masukMahasiswa() {
+        // pindah ke halaman khusus mahasiswa
+        window.location.href = "main.html";
+      }
+
+      function masukDosenDemo() {
+        // pindah ke halaman khusus dosen
+        window.location.href = "dosen.html";
+      }
+
+      // tombol PMB
+      function bukaPMB() {
+        window.location.href = "pmb.html";
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        toggleLoginRole();
+      });
+    </script>
+  </body>
+</html>
